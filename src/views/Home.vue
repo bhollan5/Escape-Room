@@ -9,7 +9,8 @@
       </div>
 
       <div class="answer-text">
-        <input class="answer"> <button>TRY YOUR LUCK...</button>
+        <input class="answer" v-model="questions[0].answer"> 
+        <button @click="submit(0)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
@@ -43,11 +44,45 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+var md5 = require('js-md5');
 
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      questions: [
+        {
+          answer: '',
+          key: '14d010488fdb86b7b84ad331943cbb35',
+          solved: false,
+        },
+        {
+          answer: '',
+          solved: false,
+        },
+        {
+          answer: '',
+          solved: false,
+        },
+        {
+          answer: '',
+          solved: false,
+        }
+      ]
+    }
+  },
+  methods: {
+    submit(num) {
+      if (md5(this.questions[num].answer) == this.questions[num].key) {
+        console.log("Correct!");
+        this.questions[num].solved = true;
+      } else {
+        console.log("incorrect :(")
+      }
+    }
+  },
+  mounted() {
+
   }
 }
 </script>
