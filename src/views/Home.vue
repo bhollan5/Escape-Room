@@ -16,25 +16,40 @@
     </div>
     <div class="question-box" id="q2">
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
+        <div>Inspect the element. What is the id name of this question?</div>
         <br>
-        <b>17, 21, 25, 29...</b>
+        <b></b>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[1].answer"> 
+        <button @click="submit(1)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
     <div class="question-box" id="q3">
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
+        <div>What color is the hex code #008000 [answer lowercase]?</div>
         <br>
-        <b>17, 21, 25, 29...</b>
+        <b></b>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[2].answer"> 
+        <button @click="submit(2)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
     <div class="question-box" id="q4">
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
+        <div>I’m often running yet I have no legs. You need me but I don’t need you. What am I?</div>
         <br>
-        <b>17, 21, 25, 29...</b>
+        <b></b>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[3].answer"> 
+        <button @click="submit(3)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
@@ -58,19 +73,23 @@ export default {
         },
         {
           answer: '',
+          key: '74d502a7131cdac90eecdfb0531c4e87',
           solved: false,
         },
         {
           answer: '',
+          key: '9f27410725ab8cc8854a2769c7a516b8',
           solved: false,
         },
         {
           answer: '',
+          key: '9460370bb0ca1c98a779b1bcc6861c2c',
           solved: false,
-        }
+        },
       ]
     }
   },
+      
   methods: {
     submit(num) {
       if (md5(this.questions[num].answer) == this.questions[num].key) {
@@ -82,7 +101,7 @@ export default {
     }
   },
   mounted() {
-
+    console.log(md5("q2"));
   }
 }
 </script>
