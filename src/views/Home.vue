@@ -11,7 +11,7 @@
       <div class="question-text">
         <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
         <br>
-        <b>17, 21, 26, 32, 38...</b>
+        <b>17, 21, 26, 32, 39...</b>
       </div>
 
       <div class="answer-text">
@@ -76,6 +76,10 @@
       </div>
 
     </div>
+    <div id="you-win" v-if="totalRight == 4">
+      <img src="@/assets/vampboy.png">
+      <h1><b>You frickin' win!!!!</b></h1>
+    </div>
   </div>
 </template>
 
@@ -125,6 +129,17 @@ export default {
       ]
     }
   },
+  computed: {
+    totalRight() {
+      var total = 0;
+      for (var i in this.questions) {
+        if (this.questions[i].solved) {
+          total++;
+        }
+      }
+      return total;
+    },
+  },
       
   methods: {
     submit(num) {
@@ -144,7 +159,6 @@ export default {
     }
   },
   mounted() {
-    console.log(md5('00010111'))
   }
 }
 </script>
@@ -165,7 +179,7 @@ $lp: lighten(purple, 4%);
   top: 0px;
   left: 0px;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 20% 40% 40%;
+  grid-template-rows: 0% 50% 50%;
 }
 #running-ui {
   grid-column: 1/3;
@@ -275,5 +289,16 @@ button {
 .mark {
   width: 40px;
   margin-bottom: 10px;
+}
+#you-win {
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  background: maroon;
+  box-shadow: 0px 0px 20px black;
+  padding: 10%;
+  color: white;
 }
 </style>
