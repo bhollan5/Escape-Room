@@ -2,6 +2,8 @@
   <div id="home">
     <div id="running-ui"></div>
     <div class="question-box" id="q1">
+      <img src="@/assets/check.png" class="mark">
+      <div></div>
       <div class="question-text">
         <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
         <br>
@@ -53,7 +55,7 @@ export default {
       questions: [
         {
           answer: '',
-          key: '14d010488fdb86b7b84ad331943cbb35',
+          key: '85410779053820c804ddc69ae4a48d9d',
           solved: false,
         },
         {
@@ -82,7 +84,6 @@ export default {
     }
   },
   mounted() {
-
   }
 }
 </script>
@@ -199,5 +200,9 @@ b {
 
 button {
   font-family: Courier;
+}
+
+.mark {
+  width: 40px;
 }
 </style>
