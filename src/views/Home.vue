@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
+        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of the pattern.</div>
         <br>
         <b>17, 21, 26, 32, 39...</b>
       </div>
