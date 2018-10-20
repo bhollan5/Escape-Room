@@ -2,8 +2,12 @@
   <div id="home">
     <div id="running-ui"></div>
     <div class="question-box" id="q1">
-      <img src="@/assets/check.png" class="mark">
-      <div></div>
+      <div class="mark-holder">
+        <div v-for="(attempt, i) in questions[0].attempts">
+          <img src="@/assets/check.png" class="mark" v-if="attempt == 2">
+          <img src="@/assets/ex.png" class="mark" v-else-if="attempt == 1">
+        </div>
+      </div>
       <div class="question-text">
         <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
         <br>
@@ -17,26 +21,58 @@
 
     </div>
     <div class="question-box" id="q2">
+      <div class="mark-holder">
+        <div v-for="(attempt, i) in questions[1].attempts">
+          <img src="@/assets/check.png" class="mark" v-if="attempt == 2">
+          <img src="@/assets/ex.png" class="mark" v-else-if="attempt == 1">
+        </div>
+      </div>
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
+        <div id="kheroxmysox">Vid siht fo DI eht stahw?</div>
         <br>
-        <b>17, 21, 25, 29...</b>
+        <b></b>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[1].answer"> 
+        <button @click="submit(1)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
     <div class="question-box" id="q3">
+      <div class="mark-holder">
+        <div v-for="(attempt, i) in questions[2].attempts">
+          <img src="@/assets/check.png" class="mark" v-if="attempt == 2">
+          <img src="@/assets/ex.png" class="mark" v-else-if="attempt == 1">
+        </div>
+      </div>
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
-        <br>
-        <b>17, 21, 25, 29...</b>
+        <div>The first letters of these colors' real names (lowercase):</div>
+        <div><b>#0000FF</b></div>
+        <div><b>rgba(255,165,0,1)</b></div>
+        <div><b>#FF0</b></div>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[2].answer"> 
+        <button @click="submit(2)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
     <div class="question-box" id="q4">
+      <div class="mark-holder">
+        <div v-for="(attempt, i) in questions[3].attempts">
+          <img src="@/assets/check.png" class="mark" v-if="attempt == 2">
+          <img src="@/assets/ex.png" class="mark" v-else-if="attempt == 1">
+        </div>
+      </div>
       <div class="question-text">
-        <div>Below is a pattern of numbers. Assuming the first number displayed in the pattern is the 0th number, write a program to find the 200th number of each pattern.</div>
-        <br>
-        <b>17, 21, 25, 29...</b>
+        <div><b>(00010111 * 00100110) % 00100101<br> == ________</b></div>
+      </div>
+      
+       <div class="answer-text">
+        <input class="answer" v-model="questions[3].answer"> 
+        <button @click="submit(3)">TRY YOUR LUCK...</button>
       </div>
 
     </div>
@@ -47,6 +83,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 var md5 = require('js-md5');
+import Vue from 'vue';
 
 export default {
   name: 'home',
@@ -57,33 +94,57 @@ export default {
           answer: '',
           key: '85410779053820c804ddc69ae4a48d9d',
           solved: false,
+          attempt: 0,
+          // Attempts logs 0 if unattempted, 1 if failed, and 2 if passed
+          attempts: [0,0,0,0]
         },
         {
           answer: '',
+          key: '019457fe1830d7c3f73673b6432e5f72',
           solved: false,
+          attempt: 0,
+          // Attempts logs 0 if unattempted, 1 if failed, and 2 if passed
+          attempts: [0,0,0,0]
         },
         {
           answer: '',
+          key: '1a699ad5e06aa8a6db3bcf9cfb2f00f2',
           solved: false,
+          attempt: 0,
+          // Attempts logs 0 if unattempted, 1 if failed, and 2 if passed
+          attempts: [0,0,0,0]
         },
         {
           answer: '',
+          key: 'c39ddef288635ba16078ce73364c1d42',
           solved: false,
-        }
+          attempt: 0,
+          // Attempts logs 0 if unattempted, 1 if failed, and 2 if passed
+          attempts: [0,0,0,0]
+        },
       ]
     }
   },
+      
   methods: {
     submit(num) {
       if (md5(this.questions[num].answer) == this.questions[num].key) {
         console.log("Correct!");
         this.questions[num].solved = true;
+        Vue.set(this.questions[num].attempts, this.questions[num].attempt, 2);
       } else {
         console.log("incorrect :(")
+        this.questions[num].answer = '';
+
+        Vue.set(this.questions[num].attempts, this.questions[num].attempt, 1);
+      }
+      if (this.questions[num].attempt < 3) {
+        this.questions[num].attempt++;
       }
     }
   },
   mounted() {
+    console.log(md5('00010111'))
   }
 }
 </script>
@@ -113,6 +174,7 @@ $lp: lighten(purple, 4%);
 }
 .question-box {
   border: solid 5px $brown;
+  position: relative;
 }
 #q1 {
   grid-column: 1/2;
@@ -202,7 +264,16 @@ button {
   font-family: Courier;
 }
 
+.mark-holder {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 .mark {
   width: 40px;
+  margin-bottom: 10px;
 }
 </style>
