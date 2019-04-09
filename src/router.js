@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import KHE18 from './views/KHE18.vue'
+import hacksu_escape from './views/hacksu_escape.vue'
 
 Vue.use(Router)
 
@@ -10,8 +11,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'hacksu-escape',
+      component: hacksu_escape
+    },
+    {
+      path: '/KHE18',
+      name: 'KHE18',
+      component: KHE18
     },
     {
       path: '/about',
